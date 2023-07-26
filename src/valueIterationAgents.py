@@ -47,7 +47,7 @@ class ValueIterationAgent(ValueEstimationAgent):
         for i in range(self.iterations):
             newValues = util.Counter()
             for s in self.mdp.getStates():
-                best_value = -9999
+                best_value = None
                 if self.mdp.isTerminal(s):
                     newValues[s] = self.mdp.getReward(s,None,None)
                 else:
@@ -56,7 +56,7 @@ class ValueIterationAgent(ValueEstimationAgent):
                         for nextstate, prob in self.mdp.getTransitionStatesAndProbs(s,a):
                             temp_list.append(self.discount * prob * self.values[nextstate])
                         temp = sum(temp_list)
-                        if temp > best_value:
+                        if best_value == None or temp > best_value:
                             best_value = temp
                     newValues[s] = self.mdp.getReward(s,None,None) + best_value
             self.values = newValues.copy()
@@ -79,7 +79,7 @@ class ValueIterationAgent(ValueEstimationAgent):
             temp_list.append(self.discount * prob * self.values[nextstate])
         temp = sum(temp_list)
         
-        value = self.mdp.getReward(state,None,None) + temp #this *should* be it?
+        value = self.mdp.getReward(state,None,None) + temp #this should be it
 
         return value
 
@@ -97,11 +97,11 @@ class ValueIterationAgent(ValueEstimationAgent):
             return None
 
         actions = self.mdp.getPossibleActions(state)
-        best_value = -9999
+        best_value = None
         best_action = None
         for a in actions:
             temp = self.computeQValueFromValues(state,a)
-            if temp > best_value:
+            if best_value == None or temp > best_value:
                 best_value = temp
                 best_action = a
 
