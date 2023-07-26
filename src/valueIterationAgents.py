@@ -79,7 +79,7 @@ class ValueIterationAgent(ValueEstimationAgent):
             temp_list.append(self.discount * prob * self.values[nextstate])
         temp = sum(temp_list)
         
-        value = self.mdp.getReward(state,None,None) + temp #this should be it
+        value = self.mdp.getReward(state,None,None) + temp
 
         return value
 

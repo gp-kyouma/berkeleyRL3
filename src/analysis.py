@@ -64,7 +64,6 @@ def question6():
     answerLearningRate = None
     #return answerEpsilon, answerLearningRate
     # If not possible, return 'NOT POSSIBLE'
-    # (yeah no there's no way)
     return 'NOT POSSIBLE'
 
 if __name__ == '__main__':
