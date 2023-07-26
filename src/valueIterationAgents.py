@@ -76,14 +76,12 @@ class ValueIterationAgent(ValueEstimationAgent):
         "*** YOUR CODE HERE ***"
         temp_list = []
         for nextstate, prob in self.mdp.getTransitionStatesAndProbs(state,action):
-            # this WORKS, but idk if it's the correct course of action
-            if self.mdp.isTerminal(nextstate):
-                return self.mdp.getReward(state,None,None)
-            
             temp_list.append(self.discount * prob * self.values[nextstate])
         temp = sum(temp_list)
+        
+        value = self.mdp.getReward(state,None,None) + temp #this *should* be it?
 
-        return temp
+        return value
 
     def computeActionFromValues(self, state):
         """
